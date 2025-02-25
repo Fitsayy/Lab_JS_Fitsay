@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab JS Tasks</title>
+</head>
+<body>
+    <script>
+        // Завдання 1: Операції з масивом
+        let auto = ["Volvo", "Audi"];
+        auto.push("Toyota");
+        auto[auto.length > 1 ? 1 : 0] = "Ford";
+        console.log("Видалений елемент:", auto.shift());
+        auto.unshift("BMW", "Nissan");
+        console.log("Оновлений масив:", auto);
+        
+        // Завдання 2: Сума введених чисел
+        function sumInput() {
+            let numbers = [];
+            while (true) {
+                let value = prompt("Введіть число", "");
+                if (value === null || value.trim() === "" || isNaN(value)) break;
+                numbers.push(+value);
+            }
+            return numbers.reduce((sum, num) => sum + num, 0);
+        }
+        console.log("Сума введених чисел:", sumInput());
+        
+        // Завдання 3: Масив паліндром
+        function isPalindrome(arr) {
+            return arr.join('') === arr.slice().reverse().join('');
+        }
+        console.log("Масив паліндром?", isPalindrome([1, 2, 3, 2, 1]));
+        
+        // Завдання 4: Подвійний масив паліндром
+        function isDoublePalindrome(arr) {
+            return isPalindrome(arr) && arr.every(num => num.toString() === num.toString().split('').reverse().join(''));
+        }
+        console.log("Подвійний паліндром?", isDoublePalindrome([121, 22, 33, 22, 121]));
+        
+        // Завдання 5: Кратність елементів масиву (FizzBuzz)
+        function fizzBuzz(arr) {
+            arr.forEach(num => {
+                if (num % 3 === 0 && num % 5 === 0) console.log("fizzbuzz");
+                else if (num % 3 === 0) console.log("fizz");
+                else if (num % 5 === 0) console.log("buzz");
+                else console.log(num);
+            });
+        }
+        fizzBuzz([1, 3, 5, 15, 18, 20, 30]);
+    </script>
+</body>
+</html>
