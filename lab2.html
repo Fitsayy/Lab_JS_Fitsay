@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання з датами</title>
+</head>
+<body>
+    <script>
+        // Перше завдання
+        let now = new Date();
+        document.write(`<p>1. Поточна дата: ${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}</p>`);
+
+        // Друге завдання
+        let months = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
+        document.write(`<p>2. Поточний місяць: ${months[now.getMonth()]}</p>`);
+
+        // Третє, четверте, п'яте завдання
+        document.write(`<p>3. Поточний день: ${now.getDate()}</p>`);
+        document.write(`<p>4. Поточний місяць: ${now.getMonth() + 1}</p>`);
+        document.write(`<p>5. Поточний рік: ${now.getFullYear()}</p>`);
+
+        // Шосте завдання
+        function formatTime(date) {
+            return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')} ${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+        }
+        document.write(`<p>6. Поточна дата-час: ${formatTime(now)}</p>`);
+
+        // Сьоме та восьме завдання
+        let days = ["неділя", "понеділок", "вівторок", "середа", "четвер", "п’ятниця", "субота"];
+        document.write(`<p>7. Номер дня тижня: ${now.getDay()}</p>`);
+        document.write(`<p>8. Поточний день тижня: ${days[now.getDay()]}</p>`);
+
+        // Дев'яте завдання
+        let pastDate = new Date(2015, 0, 7);
+        document.write(`<p>9. 7 січня 2015 року була ${days[pastDate.getDay()]}</p>`);
+
+        // Десяте завдання
+        document.write(`<p>10. Кількість хвилин з 1 січня 1970 року: ${Math.floor(now.getTime() / 60000)}</p>`);
+
+        // Одинадцяте завдання
+        let pastDate88 = Date.parse("1988-03-01");
+        document.write(`<p>11. Кількість годин з 1 березня 1988 року: ${Math.floor((now.getTime() - pastDate88) / 3600000)}</p>`);
+
+        // Дванадцяте завдання
+        let startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        document.write(`<p>12. Секунд з початку дня: ${Math.floor((now - startOfDay) / 1000)}</p>`);
+
+        // Тринадцяте завдання
+        let endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        document.write(`<p>13. Секунд до кінця дня: ${Math.floor((endOfDay - now) / 1000)}</p>`);
+
+        // Чотирнадцяте завдання
+        let birthday = prompt("Введіть дату народження у форматі YYYY-MM-DD:");
+        if (birthday) {
+            let bday = new Date(birthday);
+            let thisYearBday = new Date(now.getFullYear(), bday.getMonth(), bday.getDate());
+            if (thisYearBday < now) {
+                thisYearBday.setFullYear(now.getFullYear() + 1);
+            }
+            let daysLeft = Math.ceil((thisYearBday - now) / (1000 * 60 * 60 * 24));
+            alert(`До вашого дня народження залишилось ${daysLeft} днів!`);
+        }
+    </script>
+</body>
+</html>
