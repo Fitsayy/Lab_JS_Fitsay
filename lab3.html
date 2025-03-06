@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання на JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Завдання на JavaScript</h1>
+
+    <h2>Завдання 1: ucFirst</h2>
+    <label for="ucFirstInput">Введіть рядок:</label>
+    <input type="text" id="ucFirstInput">
+    <button onclick="handleUcFirst()">Показати результат</button>
+    <div id="ucFirstResult" class="result"></div>
+
+    <h2>Завдання 2: checkSpam</h2>
+    <label for="checkSpamInput">Введіть рядок:</label>
+    <input type="text" id="checkSpamInput">
+    <button onclick="handleCheckSpam()">Перевірити</button>
+    <div id="checkSpamResult" class="result"></div>
+
+    <h2>Завдання 3: truncate</h2>
+    <label for="truncateInput">Введіть рядок:</label>
+    <input type="text" id="truncateInput">
+    <label for="maxlengthInput">Максимальна довжина:</label>
+    <input type="number" id="maxlengthInput">
+    <button onclick="handleTruncate()">Урізати</button>
+    <div id="truncateResult" class="result"></div>
+
+    <h2>Завдання 4: Зрізи</h2>
+    <p>Рядок: "JavaScript is awesome!"</p>
+    <button onclick="showSlices()">Показати результати зрізів</button>
+    <div id="slicesResult" class="result"></div>
+
+    <h2>Завдання 5: Анаграми</h2>
+    <label for="word1">Перше слово:</label>
+    <input type="text" id="word1">
+    <label for="word2">Друге слово:</label>
+    <input type="text" id="word2">
+    <button onclick="checkAnagrams()">Перевірити анаграми</button>
+    <div id="anagramResult" class="result"></div>
+
+    <h2>Завдання 6: Зняти дублювання</h2>
+    <label for="removeDuplicatesInput">Введіть рядок:</label>
+    <input type="text" id="removeDuplicatesInput">
+    <button onclick="handleRemoveDuplicates()">Видалити дублікати</button>
+    <div id="removeDuplicatesResult" class="result"></div>
+
+    <script>
+        // Завдання 1: ucFirst
+        function ucFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function handleUcFirst() {
+            const str = document.getElementById('ucFirstInput').value;
+            const result = ucFirst(str);
+            document.getElementById('ucFirstResult').innerText = `Результат: ${result}`;
+        }
+
+        // Завдання 2: checkSpam
+        function checkSpam(str) {
+            const spamWords = ["типу", "якби б це", "коротше", "таки", "ну", "ось", "взагалі-то", "значить"];
+            str = str.toLowerCase();
+            return spamWords.some(word => str.includes(word));
+        }
+
+        function handleCheckSpam() {
+            const str = document.getElementById('checkSpamInput').value;
+            const result = checkSpam(str);
+            document.getElementById('checkSpamResult').innerText = result ? 'true' : 'false';
+        }
+
+        // Завдання 3: truncate
+        function truncate(str, maxlength) {
+            if (str.length > maxlength) {
+                return str.slice(0, maxlength - 1) + "…";
+            }
+            return str;
+        }
+
+        function handleTruncate() {
+            const str = document.getElementById('truncateInput').value;
+            const maxlength = parseInt(document.getElementById('maxlengthInput').value);
+            const result = truncate(str, maxlength);
+            document.getElementById('truncateResult').innerText = `Результат: ${result}`;
+        }
+
+        // Завдання 4: Зрізи
+        function showSlices() {
+            const str = "JavaScript is awesome!";
+            const result = `
+                Перші 5 символів: ${str.slice(0, 5)}<br>
+                Видалити перший і останній символ: ${str.slice(1, -1)}<br>
+                Останні 4 символи: ${str.slice(-4)}<br>
+                Розділити на дві частини: ${str.split(" ", 2).join(", ")}<br>
+                Все, крім перших 4 символів: ${str.slice(4)}
+            `;
+            document.getElementById('slicesResult').innerHTML = result;
+        }
+
+        // Завдання 5: Анаграми
+        function areAnagrams(word1, word2) {
+            const sorted1 = word1.split('').sort().join('');
+            const sorted2 = word2.split('').sort().join('');
+            return sorted1 === sorted2;
+        }
+
+        function checkAnagrams() {
+            const word1 = document.getElementById('word1').value;
+            const word2 = document.getElementById('word2').value;
+            const result = areAnagrams(word1, word2) ? 'Це анаграми!' : 'Це не анаграми.';
+            document.getElementById('anagramResult').innerText = result;
+        }
+
+        // Завдання 6: Зняти дублювання
+        function removeDuplicates(str) {
+            const uniqueChars = new Set(str.replace(/\s+/g, '')); // Видалення пробілів і дублюваних символів
+            return [...uniqueChars].join('');
+        }
+
+        function handleRemoveDuplicates() {
+            const input = document.getElementById('removeDuplicatesInput').value;
+            const result = removeDuplicates(input);
+            document.getElementById('removeDuplicatesResult').innerText = `Результат: ${result}`;
+        }
+    </script>
+</body>
+</html>
