@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання</title>
+    <style>
+        .my-class {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Завдання 1 -->
+<h2>Заголовок, не змінюється.</h2>
+<p>Абзац 1</p>
+<p>Абзац 2</p>
+<p>Абзац 3</p>
+<button onclick="changeParagraphs()">Змінити абзаци</button>
+
+<!-- Завдання 2 -->
+<h2 class="abc">Заголовок с класом abc.</h2>
+<p class="abc">Абзац с класом abc.</p>
+<p class="abc">Абзац с класом abc.</p>
+<p>Просто абзац, не змінюється.</p>
+<button onclick="changeClassParagraphs()">Змінити абзаци з класом abc</button>
+
+<!-- Завдання 3 -->
+<h2 class="abc">Заголовок с класом abc не змінюється</h2>
+<p class="abc">Абзац с класом abc.</p>
+<p class="abc">Абзац с класом abc.</p>
+<p>Просто абзац, не змінюється.</p>
+<button onclick="changeQuerySelectorParagraphs()">Змінити абзаци з класом abc</button>
+
+<!-- Завдання 4 -->
+<p>При натисканні на кнопку текст в абзаці зміниться</p>
+<button onclick="changeParagraphText()">Змінити текст абзацу</button>
+
+<!-- Завдання 5 -->
+<p>При натисканні на кнопку абзац стане h3, але текст залишиться.</p>
+<button onclick="changeParagraphToH3()">Змінити абзац на h3</button>
+
+<!-- Завдання 6 -->
+<p>Посилання:</p>
+<a href="https://example1.com">посилання1</a>
+<a href="https://example2.com">посилання2</a>
+<a href="https://example3.com">посилання3</a>
+<button onclick="showLinks()">Показати адреси посилань</button>
+
+<!-- Завдання 7 -->
+<p class="my-class">Абзац з class = "my-class". Клас задає червоний колір.</p>
+<button onclick="removeClass()">Знищити клас</button>
+
+<!-- Завдання 8 -->
+<img src="image1.jpg" alt="Image 1">
+<img src="image2.jpg" alt="Image 2">
+<img src="image3.jpg" alt="Image 3">
+<button onclick="showImageSources()">Вивести адреси картинок</button>
+
+<!-- Завдання 9 -->
+<img src="image1.jpg" alt="Image 1" onclick="showImageSource(this)">
+<img src="image2.jpg" alt="Image 2" onclick="showImageSource(this)">
+<img src="image3.jpg" alt="Image 3" onclick="showImageSource(this)">
+<p id="image-source"></p>
+
+<script>
+    // Завдання 1
+    function changeParagraphs() {
+        let paragraphs = document.getElementsByTagName("p");
+        for (let i = 0; i < paragraphs.length; i++) {
+            paragraphs[i].innerHTML = `Абзац ${i + 1}`;
+        }
+    }
+
+    // Завдання 2
+    function changeClassParagraphs() {
+        let elements = document.getElementsByClassName("abc");
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].innerHTML = `Абзац з класом abc ${i + 1}`;
+        }
+    }
+
+    // Завдання 3
+    function changeQuerySelectorParagraphs() {
+        let elements = document.querySelectorAll(".abc");
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].innerHTML = `Абзац з класом abc ${i + 1}`;
+        }
+    }
+
+    // Завдання 4
+    function changeParagraphText() {
+        let p = document.querySelector("p");
+        p.innerHTML = "Текст змінено!";
+    }
+
+    // Завдання 5
+    function changeParagraphToH3() {
+        let p = document.querySelector("p");
+        let h3 = document.createElement("h3");
+        h3.innerHTML = p.innerHTML;
+        p.parentNode.replaceChild(h3, p);
+    }
+
+    // Завдання 6
+    function showLinks() {
+        let links = document.querySelectorAll("a");
+        links.forEach(link => {
+            alert(link.href);
+        });
+    }
+
+    // Завдання 7
+    function removeClass() {
+        let element = document.querySelector(".my-class");
+        element.classList.remove("my-class");
+    }
+
+    // Завдання 8
+    function showImageSources() {
+        let images = document.querySelectorAll("img");
+        images.forEach(image => {
+            alert(image.src);
+        });
+    }
+
+    // Завдання 9
+    function showImageSource(img) {
+        let source = img.src;
+        document.getElementById("image-source").innerText = `Джерело картинки: ${source}`;
+    }
+</script>
+
+</body>
+</html>
