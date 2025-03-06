@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання на JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+        #text {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .carousel img {
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Завдання на JavaScript</h1>
+
+    <h2>1. Картинки</h2>
+    <img src="https://cdn.motor1.com/images/mgl/PKZQL/s3/1997-toyota-supra-sold-for-176-000-at-auction.jpg" alt="Image 1" class="image">
+    <img src="https://cdn2.riastatic.com/photosnew/auto/photo/mercedes-benz_g-class__491283587f.jpg" alt="Image 2" class="image">
+
+    <h2>2. Посилання з наведеним текстом в атрибут title</h2>
+    <a href="#" id="link1">Посилання 1</a>
+    <a href="#" id="link2">Посилання 2</a>
+
+    <h2>3. Дописати href в кінець тексту посилання</h2>
+    <a href="https://www.example.com" id="link3">Посилання 3</a>
+    <a href="https://www.example.com" id="link4">Посилання 4</a>
+
+    <h2>4. Відв'язати подію після першого наведення</h2>
+    <a href="https://www.example.com" id="link5">Посилання 5</a>
+    
+    <h2>5. Вивести значення input в абзац з id="test" при втраті фокусу</h2>
+    <input type="text" id="input1">
+    <input type="text" id="input2">
+    <p id="test"></p>
+
+    <h2>6. Вивести alert з value input лише на перше натискання</h2>
+    <input type="text" id="input3">
+    <input type="text" id="input4">
+
+    <h2>7. Квадрат числа при натисканні на абзац</h2>
+    <p class="number">2</p>
+    <p class="number">3</p>
+    <p class="number">4</p>
+
+    <h2>8. Перевірка правильності кількості символів в input</h2>
+    <input type="text" data-length="5" id="input5">
+    <input type="text" data-length="8" id="input6">
+
+    <h2>9. Кнопка, яка ховає div з id="text"</h2>
+    <div id="text">Текст для приховування</div>
+    <button id="hideTextButton">Приховати текст</button>
+
+    <h2>10. Кнопка, яка ховає себе після натискання</h2>
+    <button id="hideButton">Сховати цю кнопку</button>
+
+    <h2>11. Меню, яке відкривається і закривається</h2>
+    <button id="toggleMenuButton">Відкрити/Закрити меню</button>
+    <ul id="menu" style="display: none;">
+        <li>Меню 1</li>
+        <li>Меню 2</li>
+        <li>Меню 3</li>
+    </ul>
+
+    <h2>12. Карусель зображень</h2>
+    <div class="carousel">
+        <button onclick="moveCarousel('left')">←</button>
+        <img src="https://cdn.motor1.com/images/mgl/PKZQL/s3/1997-toyota-supra-sold-for-176-000-at-auction.jpg" alt="Image 1">
+        <img src="https://www.rubmw.ru/pictures/content/2020_07/47933_large.jpg" alt="Image 2">
+        <img src="https://cdn2.riastatic.com/photosnew/auto/photo/mercedes-benz_g-class__491283587f.jpg" alt="Image 3">
+        <button onclick="moveCarousel('right')">→</button>
+    </div>
+
+    <script>
+        // Завдання 1: Картинки - вивести src при натисканні
+        document.querySelectorAll('.image').forEach(image => {
+            image.addEventListener('click', () => {
+                alert(image.src);
+            });
+        });
+
+        // Завдання 2: Посилання - додати текст в title при наведенні
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('mouseover', () => {
+                link.title = link.textContent;
+            });
+        });
+
+        // Завдання 3: Посилання - додати href до кінця тексту при наведенні
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('mouseover', () => {
+                link.textContent += ` (${link.href})`;
+            });
+        });
+
+        // Завдання 4: Відв'язати подію після першого наведення
+        document.getElementById('link5').addEventListener('mouseover', function() {
+            this.textContent += ` (${this.href})`;
+            this.removeEventListener('mouseover', arguments.callee);
+        });
+
+        // Завдання 5: Вивести значення input в абзац при втраті фокусу
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('blur', () => {
+                document.getElementById('test').textContent = input.value;
+            });
+        });
+
+        // Завдання 6: Alert при першому натисканні на input
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('click', function handler() {
+                alert(input.value);
+                input.removeEventListener('click', handler);
+            });
+        });
+
+        // Завдання 7: Квадрат числа при натисканні на абзац
+        document.querySelectorAll('.number').forEach(p => {
+            p.addEventListener('click', () => {
+                let num = parseInt(p.textContent);
+                p.textContent = num * num;
+            });
+        });
+
+        // Завдання 8: Перевірка кількості символів в input
+        document.querySelectorAll('input[data-length]').forEach(input => {
+            input.addEventListener('blur', () => {
+                const requiredLength = parseInt(input.getAttribute('data-length'));
+                if (input.value.length === requiredLength) {
+                    input.style.borderColor = 'green';
+                } else {
+                    input.style.borderColor = 'red';
+                }
+            });
+        });
+
+        // Завдання 9: Приховати div при натисканні на кнопку
+        document.getElementById('hideTextButton').addEventListener('click', () => {
+            document.getElementById('text').style.display = 'none';
+        });
+
+        // Завдання 10: Приховати кнопку після натискання
+        document.getElementById('hideButton').addEventListener('click', (e) => {
+            e.target.style.display = 'none';
+        });
+
+        // Завдання 11: Відкриття/закриття меню
+        document.getElementById('toggleMenuButton').addEventListener('click', () => {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Завдання 12: Карусель зображень
+        let currentImageIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+
+        function moveCarousel(direction) {
+            if (direction === 'left') {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            } else if (direction === 'right') {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+            }
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            images.forEach((img, index) => {
+                img.style.display = index === currentImageIndex ? 'block' : 'none';
+            });
+        }
+
+        updateCarousel();
+    </script>
+
+</body>
+</html>
