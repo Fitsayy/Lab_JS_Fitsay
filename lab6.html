@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 1-5</title>
+  <style>
+    input {
+      padding: 5px;
+      font-size: 16px;
+    }
+    img {
+      transition: 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Завдання 1: Зміна кольору тексту в input -->
+  <h3>Завдання 1: Зміна кольору тексту в input</h3>
+  <input type="text" id="inputField" placeholder="Текст зміниться">
+  <button onclick="changeTextColor()">Змінити колір тексту</button>
+  
+  <br><br>
+
+  <!-- Завдання 2: Блокування/розблокування input -->
+  <h3>Завдання 2: Блокування/розблокування input</h3>
+  <input type="text" id="inputField2" placeholder="Введіть текст">
+  <button onclick="disableInput()">Заблокувати</button>
+  <button onclick="enableInput()">Розблокувати</button>
+  
+  <br><br>
+
+  <!-- Завдання 3: Зміна картинки кнопкою -->
+  <h3>Завдання 3: Зміна картинки кнопкою</h3>
+  <img id="image" src="image1.jpg" alt="Картинка 1" width="200">
+  <button onclick="changeImage()">Змінити картинку</button>
+  
+  <br><br>
+
+  <!-- Завдання 4: Зміна картинки при наведенні та виведенні миші -->
+  <h3>Завдання 4: Зміна картинки при наведенні миші</h3>
+  <img id="hoverImage" src="image1.jpg" alt="Картинка 1" width="200" 
+       onmouseover="changeImageOnHover()" onmouseout="restoreImage()">
+  
+  <br><br>
+
+  <!-- Завдання 5: Підрахунок кількості кліків на кнопці -->
+  <h3>Завдання 5: Підрахунок кількості кліків на кнопці</h3>
+  <button id="clickButton" onclick="countClicks()">Кількість кліків: 0</button>
+
+  <script>
+    // Завдання 1: Зміна кольору тексту в input
+    function changeTextColor() {
+      const input = document.getElementById('inputField');
+      input.style.color = 'red'; // змінюємо колір тексту на червоний
+    }
+
+    // Завдання 2: Блокування/розблокування input
+    function disableInput() {
+      document.getElementById('inputField2').disabled = true;
+    }
+
+    function enableInput() {
+      document.getElementById('inputField2').disabled = false;
+    }
+
+
+    // Завдання 3: Зміна картинки кнопкою
+    function changeImage() {
+      const image = document.getElementById('image');
+      if (image.src.includes('https://www.theglobeandmail.com/resizer/v2/2NBDZMUQNRFTDISJ7PDAAGLB6Y.jpg?auth=43573f7e02255ae638fec8d85995d56acf129ce984f3707d280706e61b5b9a4e&width=600&quality=80')) {
+        image.src = 'https://octane.rent/wp-content/uploads/2024/07/ford_mustang_convertible_black_15-600x400.webp'; // змінюємо на іншу картинку
+      } else {
+        image.src = 'https://www.theglobeandmail.com/resizer/v2/2NBDZMUQNRFTDISJ7PDAAGLB6Y.jpg?auth=43573f7e02255ae638fec8d85995d56acf129ce984f3707d280706e61b5b9a4e&width=600&quality=80'; // повертаємо назад
+      }
+    }
+
+    // Завдання 4: Зміна картинки при наведенні та виведенні миші
+    function changeImageOnHover() {
+      document.getElementById('hoverImage').src = 'https://octane.rent/wp-content/uploads/2024/07/ford_mustang_convertible_black_15-600x400.webp';
+    }
+
+    function restoreImage() {
+      document.getElementById('hoverImage').src = 'https://www.theglobeandmail.com/resizer/v2/2NBDZMUQNRFTDISJ7PDAAGLB6Y.jpg?auth=43573f7e02255ae638fec8d85995d56acf129ce984f3707d280706e61b5b9a4e&width=600&quality=80';
+    }
+
+    // Завдання 5: Підрахунок кількості кліків на кнопці
+    let clickCount = 0;
+
+    function countClicks() {
+      clickCount++;
+      document.getElementById('clickButton').textContent = 'Кількість кліків: ' + clickCount;
+    }
+  </script>
+
+</body>
+</html>
