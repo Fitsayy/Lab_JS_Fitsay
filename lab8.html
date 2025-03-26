@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 1-12</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f9;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h3 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 200px;
+      margin-top: 10px;
+    }
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    li {
+      background-color: #fff;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .list-actions button {
+      background-color: #28a745;
+      margin: 0 5px;
+    }
+
+    .list-actions button:hover {
+      background-color: #218838;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 10px;
+      display: inline-block;
+      width: 200px;
+      text-align: center;
+    }
+
+    .card button {
+      background-color: #dc3545;
+    }
+
+    .card button:hover {
+      background-color: #c82333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f8f9fa;
+    }
+
+    th:hover {
+      cursor: pointer;
+      background-color: #e9ecef;
+    }
+
+    .form-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .form-container input {
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Завдання 1: Додавання нового елемента до списку -->
+  <h3>Завдання 1: Додавання нового елемента до списку</h3>
+  <ul id="list"></ul>
+  <button onclick="addListItem()">Додати елемент</button>
+
+  <br><br>
+
+  <!-- Завдання 2: Видалення останнього елемента зі списку -->
+  <button onclick="removeLastItem()">Видалити останній</button>
+
+  <br><br>
+
+  <!-- Завдання 3: Очищення всіх елементів списку -->
+  <button onclick="clearList()">Очистити список</button>
+
+  <br><br>
+
+  <!-- Завдання 4: Додавання заголовка перед списком -->
+  <button onclick="addHeader()">Додати заголовок</button>
+
+  <br><br>
+
+  <!-- Завдання 5: Додавання елемента на початок списку -->
+  <button onclick="addItemAtStart()">Додати на початок</button>
+
+  <br><br>
+
+  <!-- Завдання 6: Додавання елемента з інпуту -->
+  <input type="text" id="inputText" placeholder="Текст для елемента">
+  <button onclick="addItemFromInput()">Додати з інпуту</button>
+
+  <br><br>
+
+  <!-- Завдання 7: Видалення конкретного елемента зі списку -->
+  <h3>Завдання 7: Видалення конкретного елемента</h3>
+  <ul id="listWithDelete"></ul>
+
+  <br><br>
+  <!-- Завдання 8: Переміщення елемента вгору та вниз -->
+  <h3>Завдання 8: Переміщення елемента</h3>
+  <ul id="listWithMove"></ul>
+  <br><br>
+  <!-- Завдання 9: Заміна одного вузла іншим -->
+  <p id="pNode">Текст для заміни.</p>
+  <button onclick="replaceTextNode()">Замінити</button>
+
+  <br><br>
+
+  <!-- Завдання 10: Додавання та видалення карток -->
+  <h3>Завдання 10: Картки</h3>
+  <div id="cardsContainer"></div>
+  <button onclick="addCard()">Додати картку</button>
+
+  <br><br>
+
+  <script>
+    // Завдання 1: Додавання нового елемента до списку
+    function addListItem() {
+      const li = document.createElement('li');
+      li.textContent = 'Новий елемент';
+      document.getElementById('list').appendChild(li);
+    }
+
+    // Завдання 2: Видалення останнього елемента
+    function removeLastItem() {
+      const list = document.getElementById('list');
+      if (list.children.length > 0) {
+        list.removeChild(list.lastChild);
+      }
+    }
+
+    // Завдання 3: Очищення всіх елементів
+    function clearList() {
+      document.getElementById('list').innerHTML = '';
+    }
+
+    // Завдання 4: Додавання заголовка
+    function addHeader() {
+      const header = document.createElement('h3');
+      header.textContent = 'Мій список';
+      document.body.insertBefore(header, document.getElementById('list'));
+    }
+
+    // Завдання 5: Додавання елемента на початок списку
+    function addItemAtStart() {
+      const li = document.createElement('li');
+      li.textContent = 'Новий елемент на початку';
+      document.getElementById('list').insertBefore(li, document.getElementById('list').firstChild);
+    }
+
+    // Завдання 6: Додавання елемента з інпуту
+    function addItemFromInput() {
+      const inputText = document.getElementById('inputText').value;
+      if (inputText !== '') {
+        const li = document.createElement('li');
+        li.textContent = inputText;
+        document.getElementById('list').appendChild(li);
+        document.getElementById('inputText').value = ''; // Очищення інпуту
+      }
+    }
+
+    // Завдання 7: Видалення конкретного елемента
+    function deleteItem(listItem) {
+      listItem.remove();
+    }
+
+    // Завдання 8: Переміщення елемента вгору та вниз
+    function moveUp(li) {
+      const prev = li.previousElementSibling;
+      if (prev) {
+        li.parentNode.insertBefore(li, prev);
+      }
+    }
+
+    function moveDown(li) {
+      const next = li.nextElementSibling;
+      if (next) {
+        li.parentNode.insertBefore(next, li);
+      }
+    }
+
+    // Завдання 9: Заміна одного вузла іншим
+    function replaceTextNode() {
+      const p = document.getElementById('pNode');
+      const h2 = document.createElement('h2');
+      h2.textContent = p.textContent;
+      p.replaceWith(h2);
+    }
+
+    // Завдання 10: Додавання та видалення карток
+    function addCard() {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = 'Текст картки <button onclick="removeCard(this)">Закрити</button>';
+      document.getElementById('cardsContainer').appendChild(card);
+    }
+
+    function removeCard(button) {
+      const card = button.parentElement;
+      card.remove();
+    }
+  
+
+    // Завдання 7: Додавання елементів зі списку з кнопкою видалення
+    const listWithDelete = document.getElementById('listWithDelete');
+    for (let i = 0; i < 5; i++) {
+      const li = document.createElement('li');
+      li.textContent = 'Елемент ' + (i + 1);
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Видалити';
+      deleteButton.onclick = function () {
+        deleteItem(li);
+      };
+      li.appendChild(deleteButton);
+      listWithDelete.appendChild(li);
+    }
+
+    // Завдання 8: Переміщення елементів списку вгору та вниз
+    const listWithMove = document.getElementById('listWithMove');
+    for (let i = 0; i < 5; i++) {
+      const li = document.createElement('li');
+      li.textContent = 'Елемент ' + (i + 1);
+      const moveUpButton = document.createElement('button');
+      moveUpButton.textContent = 'Вгору';
+      moveUpButton.onclick = function () {
+        moveUp(li);
+      };
+      const moveDownButton = document.createElement('button');
+      moveDownButton.textContent = 'Вниз';
+      moveDownButton.onclick = function () {
+        moveDown(li);
+      };
+      li.appendChild(moveUpButton);
+      li.appendChild(moveDownButton);
+      listWithMove.appendChild(li);
+    }
+  </script>
+
+</body>
+</html>
