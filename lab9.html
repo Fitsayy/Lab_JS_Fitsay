@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      height: 2500px; /* Для демонстрації прокрутки */
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    button {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- 1 -->
+<button onclick="alert(window.innerHeight)">1. Показати висоту вікна</button>
+
+<!-- 2 -->
+<button onclick="window.scrollTo(0, document.body.scrollHeight)">2. Прокрутити до низу</button>
+
+<!-- 3 -->
+<button onclick="alert(document.documentElement.scrollHeight > window.innerHeight ? 'Є вертикальна прокрутка' : 'Немає вертикальної прокрутки')">3. Чи є прокрутка?</button>
+
+<!-- 4+5 -->
+<button onclick="openAndAutoClose()">4–5. Відкрити example.com (600×400) і закрити через 5 с</button>
+
+<!-- 6 -->
+<script>
+  console.log(`6. Розміри при завантаженні — ширина: ${window.innerWidth}, висота: ${window.innerHeight}`);
+</script>
+
+<!-- 7 -->
+<button onclick="openAndMove()">7. Відкрити нове вікно та перемістити його в (100,100)</button>
+
+<!-- 8 -->
+<button onclick="openAndResize()">8. Відкрити нове вікно та задати розмір 800×600</button>
+
+<!-- 9 -->
+<script>
+  window.addEventListener('resize', () => {
+    console.log(`9. Розмір змінено — ширина: ${window.innerWidth}, висота: ${window.innerHeight}`);
+  });
+</script>
+
+<!-- 10 -->
+<button onclick="window.scrollBy(0, 300)">10. Прокрутити вниз на 300 px</button>
+
+<!-- 11 -->
+<script>
+  window.addEventListener('scroll', () => {
+    console.log(`11. scrollY = ${window.scrollY}`);
+  });
+</script>
+
+<!-- 12 -->
+<button onclick="dialogFlow()">12. prompt → confirm → alert</button>
+
+<script>
+  // 4+5
+  function openAndAutoClose() {
+    const w = window.open('https://example.com', '_blank', 'width=600,height=400');
+    setTimeout(() => { if (w && !w.closed) w.close(); }, 5000);
+  }
+
+  // 7
+  function openAndMove() {
+    const w = window.open('', '_blank', 'width=200,height=200');
+    setTimeout(() => { w.moveTo(100, 100); }, 100);
+  }
+
+  // 8
+  function openAndResize() {
+    const w = window.open('', '_blank', 'width=200,height=200');
+    setTimeout(() => { w.resizeTo(800, 600); }, 100);
+  }
+
+  // 12
+  function dialogFlow() {
+    const name = prompt('Введіть ваше ім’я:');
+    if (name !== null) {
+      if (confirm(`Ви ввели: ${name}. Продовжити?`)) {
+        alert(`Привіт, ${name}!`);
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
