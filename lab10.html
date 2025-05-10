@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Приклади роботи з Window API</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    section { margin-bottom: 30px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
+    h2 { margin-top: 0; }
+    button { margin: 5px; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Приклади роботи з Window API</h1>
+
+  <!-- Завдання 1: window.location -->
+  <section id="task1">
+    <h2>Завдання 1. Робота з <code>window.location</code></h2>
+
+    <!-- Просте: показати повний URL -->
+    <div>
+      <button id="show-url">Показати URL</button>
+      <div id="current-url"></div>
+    </div>
+
+    <!-- Просте: перезавантаження сторінки -->
+    <div>
+      <button id="reload-page">Перезавантажити сторінку</button>
+    </div>
+
+    <!-- Просте: перенаправлення на інший сайт -->
+    <div>
+      <button id="go-google">Перейти на Google</button>
+    </div>
+
+    <!-- Середня: розбити URL на частини -->
+    <div>
+      <button id="split-url">Розбити URL</button>
+      <pre id="url-parts"></pre>
+    </div>
+
+    <!-- Середня: перевірка сайту -->
+    <div>
+      <button id="check-host">Перевірити хост</button>
+      <div id="host-result"></div>
+    </div>
+  </section>
+
+  <!-- Завдання 2: window.history -->
+  <section id="task2">
+    <h2>Завдання 2. Робота з <code>window.history</code></h2>
+
+    <!-- Просте: назад/вперед -->
+    <button id="go-back">Назад</button>
+    <button id="go-forward">Вперед</button>
+    <div>Записів в історії: <span id="history-length"></span></div>
+
+    <!-- Середня: go(-2) -->
+    <button id="go-minus-two">Назад на 2 кроки</button>
+
+    <!-- Для демонстрації навігації між трьома сторінками створіть три файли і вставте сюди посилання -->
+    <div>
+      <a href="page1.html">Сторінка 1</a> |
+      <a href="page2.html">Сторінка 2</a> |
+      <a href="page3.html">Сторінка 3</a>
+    </div>
+  </section>
+
+  <!-- Завдання 3: window.navigator -->
+  <section id="task3">
+    <h2>Завдання 3. Робота з <code>window.navigator</code></h2>
+    <div id="browser-info"></div>
+    <div id="browser-language"></div>
+    <button id="detect-browser">Визначити браузер</button>
+    <div id="greeting"></div>
+  </section>
+
+  <!-- Завдання 4: Cookies -->
+  <section id="task4">
+    <h2>Завдання 4. Робота з Cookies</h2>
+    <button id="set-cookie-simple">Встановити Cookie</button>
+    <button id="show-cookies">Показати Cookies</button>
+    <div id="all-cookies"></div>
+
+    <form id="name-form">
+      <label>Ваше ім’я: <input type="text" id="user-name"></label>
+      <button type="submit">Зберегти ім’я</button>
+    </form>
+    <div id="saved-name"></div>
+  </section>
+
+  <script>
+    // Завдання 1
+    document.getElementById('show-url').onclick = () => {
+      document.getElementById('current-url').innerText = window.location.href;
+    };
+    document.getElementById('reload-page').onclick = () => location.reload();
+    document.getElementById('go-google').onclick = () => location.href = 'https://www.google.com';
+    document.getElementById('split-url').onclick = () => {
+      const { protocol, host, pathname } = window.location;
+      document.getElementById('url-parts').innerText =
+        `Protocol: ${protocol}\nHost: ${host}\nPath: ${pathname}`;
+    };
+    document.getElementById('check-host').onclick = () => {
+      const allowed = 'example.com';
+      if (window.location.host !== allowed) {
+        window.location.href = 'https://' + allowed;
+      } else {
+        document.getElementById('host-result').innerText = 'Ви на потрібному сайті.';
+      }
+    };
+
+    // Завдання 2
+    document.getElementById('go-back').onclick = () => history.back();
+    document.getElementById('go-forward').onclick = () => history.forward();
+    document.getElementById('history-length').innerText = history.length;
+    document.getElementById('go-minus-two').onclick = () => history.go(-2);
+
+    // Завдання 3
+    const infoDiv = document.getElementById('browser-info');
+    const langDiv = document.getElementById('browser-language');
+    infoDiv.innerText = `Browser: ${navigator.appName}, Version: ${navigator.appVersion}`;
+    langDiv.innerText = `Language: ${navigator.language}`;
+    document.getElementById('detect-browser').onclick = () => {
+      const name = navigator.userAgent;
+      const msg = name.includes('Chrome') ? 'Ви використовуєте Chrome.' : 'Це не Chrome.';
+      document.getElementById('greeting').innerText = msg;
+    };
+    // Привітання за мовою
+    const greetings = { en: 'Hello!', uk: 'Привіт!', ru: 'Здравствуйте!' };
+    const userLang = navigator.language.slice(0,2);
+    document.getElementById('greeting').innerText = greetings[userLang] || 'Hello!';
+
+    // Завдання 4
+    document.getElementById('set-cookie-simple').onclick = () => {
+      document.cookie = 'testCookie=HelloWorld';
+      alert('Cookie встановлено!');
+    };
+    document.getElementById('show-cookies').onclick = () => {
+      document.getElementById('all-cookies').innerText = document.cookie;
+    };
+    // Форма для імені з терміном 7 днів
+    const form = document.getElementById('name-form');
+    const nameInput = document.getElementById('user-name');
+    const savedDiv = document.getElementById('saved-name');
+    form.onsubmit = e => {
+      e.preventDefault();
+      const name = nameInput.value;
+      const expires = new Date(Date.now() + 7*24*60*60*1000).toUTCString();
+      document.cookie = `userName=${name}; expires=${expires}; path=/`;
+      savedDiv.innerText = `Привіт, ${name}!`;
+    };
+    // При завантаженні показати збережене ім'я
+    window.onload = () => {
+      const match = document.cookie.match(/userName=([^;]+)/);
+      if (match) savedDiv.innerText = `Вітаємо знову, ${match[1]}!`;
+    };
+  </script>
+</body>
+</html>
